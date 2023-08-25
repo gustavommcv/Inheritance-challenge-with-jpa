@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -23,11 +24,14 @@ public class Manager extends Employee {
 
     private Double bonus;
 
-    public Manager() { }
+    public Manager() {
 
-    public Manager(List<Employee> employees, Double bonus) {
-        this.employees = employees;
-        this.bonus = bonus;
+    }
+    
+    public Manager(String name, Double salary, ArrayList arr) { 
+        super(name, salary, null);
+        this.employees = arr == null ? new ArrayList<>() : arr;
+        updateBonus();
     }
 
     public int getId() {
@@ -44,6 +48,8 @@ public class Manager extends Employee {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+        this.employees.forEach(e -> e.setManager(this));
+        updateBonus();
     }
 
     public Double getBonus() {
@@ -56,6 +62,13 @@ public class Manager extends Employee {
 
     public void addEmployee(Employee e) {
         employees.add(e);
+        e.setManager(this);
+        updateBonus();
+    }
+
+    public void addEmployees(List<Employee> arr) {
+        employees.addAll(arr);
+        arr.forEach(e ->  e.setManager(this));
         updateBonus();
     }
 
@@ -65,11 +78,17 @@ public class Manager extends Employee {
     }
 
     public void updateBonus() {
-        setBonus(bonus *= (employees.size() * 0.1));
+        if (employees == null) {
+            System.out.println("000000Updating bonus for manager: " + this.name);
+            setBonus(0.0);
+        } else {
+            System.out.println("111111Updating bonus for manager: " + this.name);
+            setBonus(employees.size() * 0.1);
+        }
     }
 
     @Override
     public Double getSalary() {
-        return salary = salary + (salary * bonus);
+        return salary + (salary * bonus);
     }
 }
