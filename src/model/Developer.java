@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,4 +23,12 @@ public class Developer extends Employee {
     @Column(name = "NIVEL")
     @Enumerated(EnumType.STRING)
     private Level level;
+
+    public Developer() {
+    }
+
+    public Developer(String name, Double salary, Level level) { 
+        super(name, salary, null);
+        this.level = level;
+    }
 }
