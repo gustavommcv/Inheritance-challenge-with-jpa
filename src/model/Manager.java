@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @PrimaryKeyJoinColumn(name = "ID_FUNCIONARIO")
 @Table(name = "GERENTES")
+@DiscriminatorValue("Gerente")
 public class Manager extends Employee {
     
     @Id

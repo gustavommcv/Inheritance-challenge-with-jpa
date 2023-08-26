@@ -1,8 +1,7 @@
 package model;
 
-import java.util.ArrayList;
-
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,6 +14,7 @@ import model.enums.Level;
 @Entity
 @PrimaryKeyJoinColumn(name = "ID_FUNCIONARIO")
 @Table(name = "DESENVOLVEDORES", schema = "desafio-jpa")
+@DiscriminatorValue("Desenvolvedor")
 public class Developer extends Employee {
     
     @Id
